@@ -1,0 +1,13 @@
+chartName,chartLabel,labelAlias,teamCount
+eric-oss-adc,ADC,ADC,5
+eric-oss-app-mgr,APP MGR,App Manager,6
+eric-oss-common-base,BASE PLATFORM,Base Platform,3
+eric-oss-config-handling,CONFIG HANDLING,CH,1
+eric-oss-connected-systems-registry,CS,CS,1
+eric-oss-dmm,DMM,DMM,4
+eric-oss-ericsson-adaptation,EAS,EAS,3
+eric-oss-ml-execution-env,ML,ML,1
+eric-oss-oran-support,ORAN SUPPORT,Oran Support,1
+eric-oss-pm-stats-calc-handling,PMH,PMH,3
+eric-topology-exposure-handling,TIEH,TIEH,4
+eric-topology-handling,TOPOLOGY HANDLING,Topology Handling,1

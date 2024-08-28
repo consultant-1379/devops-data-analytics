@@ -1,0 +1,80 @@
+.each-build{
+    display: flex;
+    width: 100%;
+    height: 32px;
+    align-items: center;
+    padding-left: 8px;
+}
+
+.build-wall{
+    width: 6px;
+    height: 32px;
+}
+
+.build-combiner{
+    display: flex;
+    border: 1px solid transparent;
+    margin: 0 1px;
+    cursor: pointer;
+    pointer-events: stroke;
+}
+
+.opacity-change{
+    border-color: rgb(255 255 255 / 74%);
+}
+
+.active{
+    border-color: #ff3030;
+}
+
+
+.red-color{
+    background: linear-gradient(90deg, rgb(116 34 34) 0%, rgb(44 44 55 / 100%) 100%);
+}
+
+.red-wall-color{
+    background-color: #ff3030;
+}
+
+.orange-color{
+    background: linear-gradient(90deg, rgb(97 70 30) 0%, rgb(44 44 55 / 100%) 100%);
+}
+
+.orange-wall-color{
+    background: #ff9504;
+}
+
+.green-color{
+    background: linear-gradient(90deg, rgb(35 107 38) 0%, rgb(44 44 55 / 100%) 100%);
+}
+
+.green-wall-color{
+    background-color: #30ff3f;
+}
+
+.black-color{
+    background: linear-gradient(90deg, rgb(44 44 55 / 100%) 100%, rgb(65 66 68 / 100%) 100%);
+}
+
+.black-wall-color{
+    background-color: rgb(77 77 104 / 90.4%);
+}
+
+.responsive-grid{
+    display: grid;
+    width: 100%;
+    gap: 2px;
+    grid-template-columns: repeat(auto-fill, minmax(105px,1fr));
+    overflow-x: auto;
+}
+
+:host{
+    display: flex;
+    width: 100%;
+    height: 90%;
+    flex-direction: column;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}

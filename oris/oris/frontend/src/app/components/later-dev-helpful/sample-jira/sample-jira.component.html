@@ -1,0 +1,54 @@
+
+      <section *ngIf="tableState$ | async as tableState" class="example-container mat-elevation-z8" tabindex="0">
+        <table style="text-wrap: nowrap;" mat-table [dataSource]="dataSource">
+          
+        <ng-container *ngFor="let column of columns; let i = index; trackBy : trackByFn "
+          [matColumnDef]="column.columnDef">
+          <th mat-header-cell *matHeaderCellDef>
+            {{column.header }}
+          </th>
+          <td  mat-cell *matCellDef="let row" [ngSwitch]="column.type">
+            <ng-container *ngSwitchCase="'url'">
+              <a style="color: unset;" target="_blank" [href]="row[column.columnDef]?.value ?? '/'"> {{column.header}} </a>
+            </ng-container>
+            <ng-container *ngSwitchCase="'edit'"  >
+              <div style="display: flex; align-items: center; justify-content: flex-start; width: 200px;" >
+                <ng-container *ngIf="editorOff else editableCell">
+                  <div>
+                    {{ row[column.columnDef]?.value ?? 'NA' }}
+                  </div>
+                  <button style="top: -7px;" (click)="toggle()" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                </ng-container>
+              </div>
+            <ng-template #editableCell>
+              <input style="width: 100px;" [value]="row[column.columnDef].value"/>
+              <button style="top: -7px;" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                <mat-icon>done</mat-icon>
+              </button>
+              <button style="top: -7px;" (click)="toggle()"  mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                <mat-icon>close</mat-icon>
+              </button>
+            </ng-template>
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+              {{ row[column.columnDef]?.value ?? 'NA' }}
+            </ng-container>
+          </td>
+        </ng-container>
+  
+        <tr class="table-header" mat-header-row
+          *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">
+            <div style="display: flex; align-items: center; justify-content: center;">
+              <h3>No data available.</h3>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </section>  
+

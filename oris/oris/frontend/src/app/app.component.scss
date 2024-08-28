@@ -1,0 +1,42 @@
+:root {
+    --light-default-bg : #4e4e4e;
+    --light-default:  #f2f2f2;
+    --dark-default-bg :  #fafafa;
+    --dark-default: #242424;
+}
+
+.height-80vh {
+    min-height: 80vh;
+}
+
+.dark .doda-default-color {
+    background: var(--dark-default-bg);
+    color: var(--dark-default);
+}
+
+.light .doda-default-color {
+    background: var(--light-default-bg);
+    color: var(--light-default);
+}
+
+.light .navigation, .dark .navigation  {
+    height: calc(80% - 44px);
+    overflow: unset;
+  }
+
+  @media only screen and (min-width: 30em) {
+    .light main .app .appnav.hidden, .dark main .app .appnav.hidden {
+        margin: 0;
+      width: 72px;
+      opacity: 1;
+    }
+  }
+
+  .light .page .intro-text, .dark .page .intro-text {
+    font-size: 22px;
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+.page-section{
+  font-size: 18px;
+}

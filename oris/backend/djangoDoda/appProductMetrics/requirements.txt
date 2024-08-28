@@ -1,0 +1,8 @@
+django
+djangorestframework
+django-cors-headers
+elasticsearch
+pandas
+requests
+transformers
+torch

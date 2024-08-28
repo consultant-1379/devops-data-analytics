@@ -1,0 +1,38 @@
+<form class="eds-form" [formGroup]="form">
+  <div class="form-header">
+    <div class="title">Feeback Form</div>
+    <p>Feel free to give your honest feeback, to help serve you better.</p>
+  </div>
+
+  <div class="row form-body">
+    <div class="column sm-12 md-12 lg-6">
+      <div class="form-group">
+        <div *ngFor="let qs of questions" class="form-element">
+          <div class="title">
+            {{qs.question}}
+          </div>
+
+          <div>
+            <ng-container *ngFor="let op of qs.options;index as i">
+              <input [id]="i+qs.question" type="radio" checked [value]="op" [formControlName]="qs.id">
+              <label [for]="i+qs.question">{{op}}</label>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="form-element">
+          <label for="comments">Comments(Optional)</label>
+          <textarea id="comments" placeholder="Enter Comments Here" [formControlName]="'comments'"></textarea>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="form-footer">
+    <button aria-live="polite" role="status" type="submit" [ngClass]="addClass" class="btn primary"  [disabled]="!form.valid" (click)="sendFeedbackData()">Send</button>
+    <button type="button" class="btn" (click)="clearResponse()">Clear Response</button>
+  </div>
+</form>

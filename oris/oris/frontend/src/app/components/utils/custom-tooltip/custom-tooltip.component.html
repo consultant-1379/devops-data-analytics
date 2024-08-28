@@ -1,0 +1,8 @@
+
+
+<div class="the-tooltip" style="display: flex; align-items: center; justify-content: center;">
+    <div [ngStyle]="{'top': top, 'left': left}" [ngClass]="classes">
+        <ng-container [ngTemplateOutlet]="content"></ng-container>
+    </div>
+    <div class="right-arrow"></div>
+</div>

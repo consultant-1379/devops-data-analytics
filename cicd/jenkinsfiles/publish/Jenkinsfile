@@ -1,0 +1,86 @@
+#!/usr/bin/env groovy
+
+def bob = "bob/bob -r \${WORKSPACE}/cicd/rulesets/release.yaml"
+
+pipeline {
+    agent {
+        node {
+            label SLAVE
+        }
+    }
+
+    stages {
+        stage('Cleaning Git Repo') {
+            steps {
+                sh 'git clean -xdff'
+                sh 'git submodule sync'
+                sh 'git submodule update --init --recursive'
+            }
+        }
+        stage('Bump angular-setup') {
+            steps {
+                sh "${bob} set-ang-env-variables bump-service-version"
+                script {
+                    env.IMAGE_VERSION = readFile('artifact.properties').trim()
+                }
+            }
+        }
+        stage('Build angular-setup') {
+            steps {
+                sh "${bob} set-ang-env-variables build-docker-image"
+            }
+        }
+        stage('Publish angular-setup') {
+            steps {
+                sh "${bob} set-ang-env-variables publish-docker-image"
+            }
+        }
+        stage('Add changes to Version file of angular setup') {
+            steps {
+                sh "${bob} set-ang-env-variables add-changes-to-version-file"
+            }
+        }
+
+        stage('Bump python-setup') {
+            steps {
+                sh "${bob} set-py-env-variables bump-service-version"
+                script {
+                    env.IMAGE_VERSION = readFile('artifact.properties').trim()
+                }
+            }
+        }
+        stage('Build python-setup') {
+            steps {
+                sh "${bob} set-py-env-variables build-docker-image"
+            }
+        }
+        stage('Publish python-setup') {
+            steps {
+                sh "${bob} set-py-env-variables publish-docker-image"
+            }
+        }
+        stage('Add changes to Version file of python setup') {
+            steps {
+                sh "${bob} set-py-env-variables add-changes-to-version-file"
+            }
+        }
+        stage('Push up changes to version files') {
+            steps {
+                sh "${bob} push-changes-to-version-files"
+            }
+        }
+        stage('Archive artifact properties file') {
+            steps {
+                archiveArtifacts artifacts: 'artifact.properties', onlyIfSuccessful: true
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                sh "docker system prune -a -f"
+            }
+        }
+    }
+}

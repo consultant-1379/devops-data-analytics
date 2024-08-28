@@ -1,0 +1,70 @@
+<div class="title-and-filter">
+  <mat-form-field appearance="outline">
+    <mat-label>Search and Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Type something.."
+      #input>
+    <mat-icon matSuffix>filter_list</mat-icon>
+  </mat-form-field>
+</div>
+
+<!-- <div style="position: absolute; height: 20px; top: 18%; left: 40%;">
+<ng-container *ngIf="loader$ | async">
+    <h3>Loading... </h3>
+  </ng-container>
+</div> -->
+<ng-container *ngIf="tableState$ | async as tableState" [ngSwitch]="tableState.state">
+  <ng-container *ngSwitchCase="status.LOADING">
+    <div style="display: flex; align-items: center; justify-content: center;">
+      <h3> {{tableState.message}} </h3>
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchCase="status.ERROR">
+    <div style="display: flex; align-items: center; justify-content: center;">
+      <h3>{{tableState.message}}</h3>
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchCase="status.LOADED">
+    <section *ngIf="tableState.data" class="example-container mat-elevation-z8" tabindex="0">
+      <table mat-table [dataSource]="tableState.data">
+        
+        <ng-container *ngFor="let column of tableState.columns"
+        [matColumnDef]="column.columnDef">
+        <th mat-header-cell *matHeaderCellDef>
+          {{column.header | titlecase}}
+        </th>
+        <td mat-cell *matCellDef="let row" [ngSwitch]="column.type">
+          <ng-container *ngSwitchCase="'url'">
+            <a style="color: unset;" target="_blank" [href]="column.cell(row)"> {{column.header}} </a>
+          </ng-container>
+          <ng-container *ngSwitchDefault>
+            {{ column.cell(row) }} 
+          </ng-container>
+        </td>
+      </ng-container>
+
+      <tr class="table-header" mat-header-row
+        *matHeaderRowDef="tableState.displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: tableState.displayedColumns;"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">
+          <div style="display: flex; align-items: center; justify-content: center;">
+            <h3>No data available.</h3>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </section>
+  </ng-container>
+  <ng-container *ngSwitchDefault>
+    <div style="display: flex; align-items: center; justify-content: center;">
+      <h3>No Data available.</h3>
+    </div>
+  </ng-container>
+</ng-container>
+<button mat-button matTooltipPosition="above" matTooltip="Download as CSV"
+  class="download-btn">
+  <span class="material-symbols-outlined">
+    download
+  </span>
+</button>

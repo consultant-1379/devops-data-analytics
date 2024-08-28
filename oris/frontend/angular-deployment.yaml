@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: angular-deployment
+  labels:
+    app: angular
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: angular
+  template:
+    metadata:
+      labels:
+        app: angular
+    spec:
+      containers:
+      - name: angular
+        image: armdocker.rnd.ericsson.se/proj-eric-oss-dev-test/doda-frontend-setup:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 4400
+      imagePullSecrets:
+      - name: eiapregsecret
+

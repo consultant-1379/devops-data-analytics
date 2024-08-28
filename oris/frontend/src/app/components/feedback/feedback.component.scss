@@ -1,0 +1,10 @@
+
+  .display-flex {
+    display: flex;
+    align-items: flex-end;
+    padding: 16px;
+  }
+
+  :host {
+    height: inherit;
+  }

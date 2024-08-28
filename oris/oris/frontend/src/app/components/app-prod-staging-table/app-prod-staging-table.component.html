@@ -1,0 +1,98 @@
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+<div class="app-stage">
+  <app-content-header title="Content Flowing Into App Staging"></app-content-header>
+  <div class="mat-elevation-z8 ">
+    <table style="position: relative;" mat-table [dataSource]="dataSource" matSort>
+      <!-- First header row def -->
+      <ng-container *ngFor="let column of columnDefs" [matColumnDef]="column.matColumnDef">
+        <th mat-header-cell *matHeaderCellDef [attr.rowspan]="column.isColspan ? null : column.span"
+          [attr.colspan]="column.isColspan ? column.span : null" class="mat-h2">
+          {{ column.headerName}}
+        </th>
+      </ng-container>
+
+      <!-- Second header row def -->
+      <ng-container *ngFor="let column of subColumnDefs" [matColumnDef]="column.matColumnDef">
+        <th mat-header-cell *matHeaderCellDef [attr.colspan]="column.colspan">
+          <div style="display: flex;justify-content: center;align-items: center;">
+            <div>
+
+            </div>
+            <div style="display: flex; flex-direction: row; justify-content: center;align-items: center;">
+              <div >
+                {{  column.headerName }}
+              </div>
+              <div matTooltip="Moving Average" style="margin-top: 2px; margin-left: 4px; border-bottom: 1px dotted #000;" matTooltipPosition="above" >{{(column.headerName.includes('Yesterday') ? '': ' MA')}}</div>
+              <!-- TODO: Later part -->
+              <!-- <div class="spinner">
+                <input type="number" value="80" id="ns2" max="100" min="0" step="10" style="height: 24px;width: 54px;">
+              </div> -->
+            </div>
+          </div>
+
+
+        </th>
+      </ng-container>
+
+      <!-- Third header row with data def -->
+      <ng-container *ngFor="let column of columns" [matColumnDef]="column.matColumnDef">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header [id]="column.matColumnDef">
+          {{ column.headerName }}
+        </th>
+        <td style="padding: 0;" mat-cell *matCellDef="let row">
+          <ng-container [ngSwitch]="column.switchCase">
+            <ng-container *ngSwitchCase="'application'">
+              <button mat-button [matMenuTriggerFor]="menu">
+                <h5 style="margin: 0">
+                  {{ row[column.matColumnDef].name }} ({{ row[column.matColumnDef].count }})
+                </h5>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item *ngFor="let team of row[column.matColumnDef].teamNames">{{team}}</button>
+              </mat-menu>
+            </ng-container>
+            <ng-container *ngSwitchCase="'deliveries'">
+              <div class="td-div-alignment" [ngClass]="row[column.matColumnDef].class" >
+                <h5 *ngIf="row[column.matColumnDef].totalDeliveries === '-'; else elseBlock">{{ row[column.matColumnDef].totalDeliveries }}</h5>
+                <ng-template #elseBlock>
+                  <h5 [matTooltip]="'Pass: '+ row[column.matColumnDef].successfulDeliveries+' Fail: '+row[column.matColumnDef].failedDeliveries"
+                  matTooltipPosition="left"
+                  >
+                  {{ row[column.matColumnDef].totalDeliveries }}
+                </h5>
+              </ng-template>
+              </div>
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+              <h5 class="td-div-alignment" [ngClass]="row[column.matColumnDef].class">
+                {{ row[column.matColumnDef].passRate }}
+              </h5>
+            </ng-container>
+          </ng-container>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnHeaders"></tr>
+      <tr mat-header-row *matHeaderRowDef="subColumnHeaders"></tr>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell loader-cell" colspan="9">
+          <ng-container [ngSwitch]="appState$ | async">
+            <div  *ngSwitchCase="state.LOADING" class="loading"></div>
+            <div *ngSwitchCase="state.ERROR" class="empty-state">
+              <div class="message">
+                <p>Error while loading data.</p>
+              </div>
+            </div>
+            <div *ngSwitchDefault class="empty-state">
+              <div class="message">
+                <p>No result found.</p>
+              </div>
+            </div>
+          </ng-container>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

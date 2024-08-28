@@ -1,0 +1,42 @@
+{
+  "indices":{
+      "cicd-report-center":{
+          "label": "eicAppStaging",
+          "indexType": "app",
+          "fieldQuery": "pipeline.application.keyword",
+          "mustQuery":{
+                  "must":
+                  [
+                    {"match": {"stage.name": "Report Center Registration"}},
+                    {"match": {"pipeline.skipChartRelease": "false"}},
+                    {"terms": {"pipeline.status.keyword": ["TERMINAL","SUCCEEDED"]}}
+                  ]
+                }
+      },
+      "product-staging-data":{
+          "label": "eicProductStaging",
+          "indexType": "product",
+          "fieldQuery": "pipeline.chartName.keyword",
+          "mustQuery":{
+              "must": [
+                {"match": {"stage.name": "Report Center Registration"}},
+                {"terms": {"pipeline.status.keyword": ["TERMINAL","SUCCEEDED"]}}
+              ],
+              "must_not":[
+                  {"terms": {"pipeline.chartName.keyword": ["", "None"]}},
+                  {"regexp": {"pipeline.chartName.keyword": ".*-eo-.*"}}
+              ]
+            }
+      }
+  },
+  "dataFormat":{
+    "applicationName": "",
+    "appLabel": "",
+    "teams": [],
+    "teamCount": 0,
+    "yesterdayData": {
+    "totalPipelineDeliveries": 0, "totalSuccessCount" : 0, "totalFailedCount" : 0},
+    "twentyDaysData":{
+    "totalPipelineDeliveries": 0, "totalSuccessCount" : 0, "totalFailedCount" : 0}
+    }
+}

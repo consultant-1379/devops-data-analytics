@@ -1,0 +1,2 @@
+export const USER_GUIDE_URL = 'https://eteamspace.internal.ericsson.com/display/DGBase/DODA+User+Guide#UserGuide';
+export const SUPPORT_URL = 'https://eteamspace.internal.ericsson.com/display/DGBase/Regulus+Support+Process'

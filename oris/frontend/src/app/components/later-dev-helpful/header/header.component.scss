@@ -1,0 +1,52 @@
+.toolbar, .right-header, .right-sub-header{
+    display: flex;
+    align-items: center;
+}  
+
+.custom-select{
+    margin: 10px;
+
+    h4{
+        margin: 0;
+    }
+
+    .custom-inputs{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .custom-sizing{
+        height: 42px;
+        margin: 8px;
+    }
+
+    .apply-button{
+        text-align: end;
+    }
+}
+
+
+
+
+.toolbar{
+    flex-direction: row;
+    justify-content: space-between;
+
+    .header{
+        margin-left: 15%;
+        font-size: 1.5rem;
+    };
+
+    .right-header{
+        justify-content: center;
+        
+        .right-sub-header{
+            margin: 0 8px;
+        }
+    }
+}
+
+.header-icon{
+    transform: scale(0.7);
+  }

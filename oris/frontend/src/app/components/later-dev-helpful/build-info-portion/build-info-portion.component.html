@@ -1,0 +1,23 @@
+
+<div class="grid-container" *ngIf="(datas$  | async) as dataState">
+  <mat-grid-list cols="2" [rowHeight]="dataState.rowHeight" gutterSize="6px">
+    <mat-grid-tile *ngFor="let tile of dataState.tiles | async"
+      [colspan]="tile.cols" [rowspan]="tile.rows">
+      <mat-card class="dashboard-card">
+        <mat-card-header style="padding-top: 8px;">
+          <mat-card-title [ngStyle]="{'font-size': '1em'}">
+            {{tile.title}}
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content [ngStyle]="{'height': '100%', 'padding': '0 8px'}">
+          <ng-container *ngIf="tile.buildsCount && tile.buildsState; else otherContainers">
+            <ng-container *ngComponentOutlet="tile.component; inputs: {buildsCount: tile.buildsCount, buildsState: tile.buildsState}"></ng-container>
+          </ng-container>
+          <ng-template #otherContainers>
+            <ng-container *ngComponentOutlet="tile.component"></ng-container>
+          </ng-template>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

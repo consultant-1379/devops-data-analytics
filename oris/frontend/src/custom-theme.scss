@@ -1,0 +1,159 @@
+@use '@angular/material' as mat;
+@import '@angular/material/theming';
+@include mat.core;
+
+$eds-blue: (50 : #e0f0fd,
+  100 : #b3dafb,
+  200 : #80c1f8,
+  300 : #4da8f5,
+  400 : #2695f2,
+  500 : #0082f0,
+  600 : #007aee,
+  700 : #006fec,
+  800 : #0065e9,
+  900 : #0052e5,
+  A100 : #fff,
+  A200 : #d9e4ff,
+  A400 : #a6c0ff,
+  A700 : #8caeff,
+  contrast: (50 : #000,
+    100 : #000,
+    200 : #000,
+    300 : #000,
+    400 : #fff,
+    500 : #fff,
+    600 : #fff,
+    700 : #fff,
+    800 : #fff,
+    900 : #fff,
+    A100 : #000,
+    A200 : #000,
+    A400 : #000,
+    A700 : #000,
+  ));
+  $eds-red: (50 : #ffe6e6,
+  100 : #ffc2c2,
+  200 : #f99,
+  300 : #ff7070,
+  400 : #ff5151,
+  500 : #ff3232,
+  600 : #ff2d2d,
+  700 : #ff2626,
+  800 : #ff1f1f,
+  900 : #ff1313,
+  A100 : #fff,
+  A200 : #fffafa,
+  A400 : #ffc7c7,
+  A700 : #ffadad,
+  contrast: (50 : #000,
+    100 : #000,
+    200 : #000,
+    300 : #000,
+    400 : #000,
+    500 : #fff,
+    600 : #fff,
+    700 : #fff,
+    800 : #fff,
+    900 : #fff,
+    A100 : #000,
+    A200 : #000,
+    A400 : #000,
+    A700 : #000,
+  ));
+$eds-purple: (50 : #f5effa,
+100 : #e7d7f2,
+200 : #d7bce9,
+300 : #c7a1e0,
+400 : #bb8cd9,
+500 : #af78d2,
+600 : #a870cd,
+700 : #9f65c7,
+800 : #965bc1,
+900 : #8648b6,
+A100 : #fff,
+A200 : #efdbff,
+A400 : #d8a8ff,
+A700 : #cd8fff,
+contrast: (50 : #000,
+  100 : #000,
+  200 : #000,
+  300 : #000,
+  400 : #000,
+  500 : #000,
+  600 : #000,
+  700 : #000,
+  800 : #fff,
+  900 : #fff,
+  A100 : #000,
+  A200 : #000,
+  A400 : #000,
+  A700 : #000,
+));
+$doda-primary: mat.define-palette($eds-blue);
+$doda-accent: mat.define-palette($eds-purple);
+$doda-warn: mat.define-palette($eds-red);
+$custom-typography: mat.define-typography-config($font-family: 'Ericsson Hilda');
+$doda-light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $doda-primary,
+      accent: $doda-accent,
+      warn: $doda-warn,
+    ),
+    typography: $custom-typography,
+  )
+);
+$doda-dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $doda-primary,
+      accent: $doda-accent,
+      warn: $doda-warn,
+    )
+  )
+);
+
+.cdk-overlay-container {
+
+  .mat-mdc-tooltip .mdc-tooltip__surface{
+    max-width: 240px;
+  }
+
+  .mat-mdc-menu-panel {
+    max-width: 420px;
+  }
+
+  .mat-mdc-menu-item {
+    min-width: 132px;
+    min-height: 32px;
+    justify-content: center;
+  }
+}
+
+@include mat.all-component-themes($doda-light-theme);
+
+.dark-mat-theme {
+  @include mat.all-component-colors($doda-dark-theme);
+}
+.mat-mdc-button.mat-mdc-button-base, .mat-mdc-raised-button.mat-mdc-button-base, .mat-mdc-unelevated-button.mat-mdc-button-base, .mat-mdc-outlined-button.mat-mdc-button-base {
+  height: 32px;
+}
+.mat-sort-header-content {
+  max-width: calc(100% - 42px);
+}
+.mat-expansion-panel {
+  background-color: transparent; 
+}
+
+.mat-expansion-panel:not([class*='mat-elevation-z']){
+  box-shadow: none;
+}
+
+.mat-mdc-cell, .mat-mdc-header-cell {
+  border: 1px solid var(--mat-table-row-item-outline-color, rgb(0 0 0 / 12%));
+}
+
+.mat-sort-header-container {
+  justify-content: center;
+  margin-top: 4px;
+}

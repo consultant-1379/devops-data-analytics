@@ -1,0 +1,58 @@
+<mat-toolbar class="toolbar">
+  <div
+    style="display: flex;align-items: center; justify-content: center; margin: 2px 0;">
+    <div [ngStyle]="{'margin-right': '8px'}"
+      [ngClass]=" ['state-dot', 'state-failure' ]"></div>
+    <h1>Upgrade Using Helmfile</h1>
+  </div>
+  <!-- <h1 class="header">Welcome to the dashboard</h1> -->
+  <div class="right-header">
+    <div class="right-sub-header">
+      <mat-form-field appearance="outline">
+        <mat-icon matPrefix class="header-icon">schedule</mat-icon>
+        <mat-label>Quick Select</mat-label>
+          <mat-select (ngModelChange)="updateDashboard($event)" panelWidth="350px" [(ngModel)]="outerValue">
+            <!-- <div class="custom-select">
+              <h4>Custom Select:</h4>
+              <ng-container >
+                <div class="custom-inputs">
+                  <mat-form-field appearance="outline" class="custom-sizing">
+                    <input matInput placeholder="Ex: 4" #input [(ngModel)]="customValue" (ngModelChange)="updateSelectedTime()" >
+                      <mat-icon [ngStyle]="{ 'cursor' : 'pointer' }" *ngIf="customValue" matSuffix (click)="resetInputFields()">close</mat-icon>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline" class="custom-sizing">
+                    <mat-label>Format</mat-label>
+                    <mat-select #innerSelect [value]="innerValue" >
+                      <mat-select-trigger> {{innerValue}} </mat-select-trigger>
+                      <mat-option  >None</mat-option>
+                      <mat-option #innerOptions *ngFor="let time of timeFormats" [value]="time.value">
+                        {{time.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </ng-container>
+
+              <div [ngClass]="'apply-button'">
+                <button mat-raised-button color="primary" (click)="closeSelect($event)" >Apply</button>
+              </div>
+            </div> -->
+            <mat-divider></mat-divider>
+            <!-- <mat-option #dynamicOuterOption [value]="timeChanger$" >{{timeChanger$ | async}}</mat-option> -->
+            <mat-option #nativeOuterOption  *ngFor="let time of frequentTimeRangeSuggestions" [value]="time.value"  >
+              {{time.viewValue}}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix class="header-icon">date_range</mat-icon>
+        </mat-form-field>
+    </div>
+    <mat-icon class="header-icon">settings</mat-icon>
+    <button
+      mat-raised-button
+      style="background-color: rgb(13 100 233); margin: 0 8px">
+      Share
+    </button>
+  </div>
+
+</mat-toolbar>
+

@@ -1,0 +1,9 @@
+<app-header></app-header>
+<div #parentContainer>
+    <ng-container *ngComponentOutlet="component; inputs: { inputs: matLeftInputs }"></ng-container>
+    <ng-container *ngComponentOutlet="component; inputs: { inputs: matRightInputs }"></ng-container>
+</div>
+
+<div style="width: 100vw; height: 100vh; background-color: #3f4871;">
+    <app-sample-jira></app-sample-jira>
+</div>

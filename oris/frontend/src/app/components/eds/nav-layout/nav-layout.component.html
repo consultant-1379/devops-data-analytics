@@ -1,0 +1,144 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+<!-- System bar -->
+<header class="sysbar mia-header" [ngClass]="{ hidden: false }">
+  <div class="items-container">
+    <div class="item">
+      <i class="icon icon-econ"></i>
+      <span class="product" routerLink="/">{{ dashboardTitle }}</span>
+    </div>
+  </div>
+  <div class="items-container">
+    <div class="item hover">
+      <span  id="doda-version" target="_blank">v0.0.1</span>
+    </div>
+    <div class="item notification-log-trigger">
+      <i class="icon icon-notification"></i>
+    </div>
+    <div class="item hover settings-trigger">
+      <i class="icon icon-profile"></i>
+      <span class="username">{{ "Signum" }}</span>
+    </div>
+  </div>
+</header>
+<main>
+  <aside class="syspanel hidden">
+    <div class="settings">
+      <div class="syspanel-top">
+        <span class="syspanel-title"></span>
+        <i class="syspanel-close icon icon-cross"></i>
+      </div>
+      <div class="row">
+        <div class="column sm-12 container">
+          <div class="profile">
+            <i class="icon icon-profile"></i>
+            <div class="username">
+              {{ "Username" }}
+            </div>
+          </div>
+          <div class="content">
+            <div style="display: flex; align-items: baseline; column-gap: 12px;"> 
+              <span>Switch theme: </span>
+              <label class="switch">
+                <input type="checkbox" (change)="switchTheme()">
+                <i class="ball"></i>
+                <span style="margin: 0 42px;" data-enabled="Light" data-disabled="Dark"></span>
+              </label>
+            </div>
+          </div>
+          <!-- TODO : Needed when implemented -->
+          <!-- <div class="bottom">
+            <button type="button" class="btn big" (click)="logout()">
+              <i class="icon icon-log-out"></i> Sign out
+            </button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="app slide-right">
+    <nav class="appbar">
+      <div class="actions-left">
+        <div class="item">
+          <i [matTooltip]="menuTooltip" matTooltipPosition="above" (click)="handleAppNav()" class="navigation-toggle closed"></i>
+        </div>
+        <div class="menu-anchor open-menu">Menu</div>
+        <div class="title open-menu">
+          <div class="breadcrumb" id="breadcrumb-action"></div>
+        </div>
+      </div>
+      <div class="actions-right"></div>
+    </nav>
+    <div class="appbody">
+      <div class="appnav">
+        <div class="tree navigation">
+          <ul>
+            <li>
+              <a class="item" routerLink="/home" routerLinkActive="active" queryParamsHandling="merge"><i
+                class='icon icon-home'></i><div class="nav-header">Home</div></a>
+          </li>
+          <li>
+            <a  style="align-items: center;" class="item" routerLink="/eic/application-product-dora" routerLinkActive="active" queryParamsHandling="merge"><i class='icon icon-app-launcher'></i>
+              <div class="nav-header">DORA Metrics</div> 
+              </a>
+          </li>
+        </ul>
+      </div>
+      <div class="tree navigation">
+        <ul>
+          <li>
+            <a class="item" target="_blank" [href]="userGuideUrl" queryParamsHandling="merge"><i
+                class='icon icon-info'></i><div class="nav-header">User Guide </div></a>
+          </li>
+          <li>
+            <a class="item" routerLink="/feedback" routerLinkActive="active" queryParamsHandling="merge"><i
+                class='icon icon-feedback'></i><div class="nav-header">Feedback</div>
+            </a>
+          </li>
+          <li>
+            <a class="item" target="_blank" [href]="supportUrl"><i class='icon icon-link'></i><div class="nav-header">Support</div></a>
+          </li>
+        </ul>
+      </div>
+    </div> 
+    <div class="appcontent">
+      <div class="tile sm-12" id="t-one-tile">
+        <div class="content">
+          <div class="height-80vh">
+            <!-- Entire app components fall in here -->
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+
+    <!-- TODO: Chat Bot -->
+    <!-- <i [matMenuTriggerFor]="menu" class='icon icon-message-contact-us' style="position: absolute; padding: 6px; scale: 2; border-radius: 50%; background-color: #1174e6; color: white; bottom: 4.2em; right: 2em;"></i>
+    <mat-menu #menu="matMenu" >
+      <div (click)="$event.stopPropagation()" style="position: relative; width: 400px; height: 420px;">
+        <div class="conv" style="font-size: small; display: flex; flex-direction: column; overflow-y: auto; max-height: 360px; padding: 8px;">
+          <div *ngFor="let msg of conversation;" [ngStyle]="{ 'place-self': msg.from === 'user' ? 'flex-end' : 'flex-start'}" style="max-width: 70%; min-width: 50%; border-radius: 10px; background-color: #e5e8ed; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); padding: 8px 12px; margin: 4px 0;">
+            {{ msg.text }}
+          </div>
+        </div>
+
+        <ng-container *ngIf="loading" >
+        <div style="position: absolute; bottom: 36px; right: 0; left: 16px;">
+          <div class="progress-bar">
+            <progress max="100"></progress>
+            <span></span>
+          </div>
+          </div>
+        </ng-container>
+        <div class="message" style="display: flex; align-items: center; justify-content: space-between; width: 100%; position: absolute; bottom: 0; padding: 4px 8px;">
+          <input #myInput [(ngModel)]="input" placeholder="Say something.." type="text" style="width: calc(100% - 64px); font-size: smaller; padding: 4px 8px; height: 32px; border: none; border-radius: 8px; background: #f0f0f0; /* Light gray background */">
+          <button (click)="sendMsg()" style="height: 36px; width: 64px; border: none; border-radius: 8px; cursor: pointer; background: #329864; color: white; padding: 0 16px;">
+            <mat-icon aria-hidden="false" aria-label="send prompt" fontIcon="send" ></mat-icon></button>
+        </div>
+      </div>
+    </mat-menu> -->
+    </div>
+    
+  </div>
+  <app-footer></app-footer>
+</div>
+</main>

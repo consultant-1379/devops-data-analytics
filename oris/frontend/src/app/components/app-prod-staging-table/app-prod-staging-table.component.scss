@@ -1,0 +1,78 @@
+.app-stage{
+    position: relative;
+    margin: 0 16px;
+}
+
+table {
+    text-align-last: center;
+    text-wrap: nowrap;
+}
+
+.mat-elevation-z8 {
+    tr{
+        height: 32px;
+    }
+    th {
+        width: 100px;
+        text-wrap: pretty;
+    }
+    .mdc-data-table__cell, .mdc-data-table__header-cell {
+        padding: 0;
+    }
+}
+
+.td-div-alignment {
+    display: flex;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+}
+
+#application {
+    text-wrap: pretty;
+}
+
+.failure{
+    background-color: #f79090;
+}
+
+.partial {
+    background-color: #FAD22D;
+}
+
+.color-amber {
+    color: #9d7e04;
+}
+
+.success{
+    background-color: #90f7b9;
+}
+
+.delivery-tooltip{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 16px;
+    font-size: medium;
+}
+
+
+
+h5 {
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+}
+
+.cell-cursor {
+    cursor: pointer;
+}
+
+.loader-cell {
+    padding: 0 50%;
+}
+.loading {
+    margin-top: 12px;
+}

@@ -1,0 +1,13 @@
+chartName,chartLabel,labelAlias
+"eric-oss-adc",ADC,ADC
+"eric-oss-app-mgr",APP MGR,App Manager
+"eric-oss-common-base,eric-cncs-oss-config,eric-cnbase-oss-config,eric-cloud-native-service-mesh,eric-cloud-native-base,eric-service-exposure-framework,eric-storage-encryption-provider",BASE PLATFORM,Base Platform
+"eric-oss-config-handling",CONFIG HANDLING,CH
+"eric-oss-connected-systems-registry",CS,CS
+"eric-oss-dmm",DMM,DMM
+"eric-oss-ericsson-adaptation",EAS,EAS
+"eric-oss-ml-execution-env",ML,ML
+"eric-oss-oran-support",ORAN SUPPORT,Oran Support
+"eric-oss-pm-stats-calc-handling",PMH,PMH
+"eric-topology-exposure-handling",TIEH,TIEH
+"eric-topology-handling",TOPOLOGY HANDLING,Topology Handling

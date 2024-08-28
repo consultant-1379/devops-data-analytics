@@ -1,0 +1,42 @@
+<ng-container  *ngIf="builds$ | async as builds" >
+
+
+<div style="text-align: right; height: fit-content;">
+    <mat-icon [ngStyle]="{ 'padding' : '0' }"  matSuffix>filter_list</mat-icon>
+</div>
+<ng-container>
+
+<div class="mat-small responsive-grid" (mouseleave)="caller(-1)"  *ngIf="builds.length else elseBlock">
+    <ng-container *ngFor="let build of builds; index as i; trackBy: trackByFn">
+        <div class="build-combiner" 
+        matTooltipClass="tooltip-styling"
+        [matTooltip]=
+        "
+        'Pipeline Id: '+ build.pipelineId +'\n'+
+        'Pipeline startTime: '+ build.pipelineStartTime + '\n'+
+        'Stage Id: '+ build.stageId +'\n'+
+        'Stage startTime: '+ build.stageStartTime + '\n'
+        "
+        matTooltipPosition="above" 
+         [ngClass]="{ 'active' :  activeCell === build.pipelineId , 'opacity-change': hoveredCell === i}"
+         mat-button
+         tabindex="0"
+         (mouseenter)="caller(i)" (click)="YouClickedMe(build.pipelineId)"
+         (keydown.enter)="YouClickedMe(build.pipelineId)"
+         >
+            <div [ngClass]="'build-wall '+ build.color + '-wall-color'"></div>
+            <div [ngClass]="'each-build '+ build.color + '-color'">
+                {{build.value}}
+            </div>
+        </div>
+    </ng-container>
+</div>
+</ng-container>
+<!-- <div style="display: flex; align-items: start; margin: 0 auto;">
+    <mat-spinner diameter="70"></mat-spinner>
+</div> -->
+<ng-template #elseBlock >
+    <div style="text-align: center; height: 100%; display: flex; align-items: center; justify-content: center;">No Pipelines Available</div>
+</ng-template>
+
+</ng-container>
